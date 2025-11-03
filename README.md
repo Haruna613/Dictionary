@@ -3,7 +3,7 @@
 
 **Docker ビルド**
 
-1. `git clone git@github.com:xxxxx/xxxxx.git`
+1. `git clone git@github.com:Haruna613/Dictionary.git`
 2. DockerDesktop アプリを立ち上げる
 3. `docker-compose up -d --build`
 
