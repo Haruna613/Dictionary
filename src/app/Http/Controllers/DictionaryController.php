@@ -23,22 +23,15 @@ class DictionaryController extends Controller
 
     public function register(DictionaryRequest $request)
     {
-        $validated = $request->validate([
-            'keyword' => 'required|string|max:255',
-            'description' => 'required|string',
-            'user_id' => 'nullable|exists:users,id',
-        ]);
+        $dictionary = $request->only(['keyword', 'description']);
+        $dictionary['user_id'] = auth()->id();
 
-        if (empty($validated['user_id']) && $request->user()) {
-            $validated['user_id'] = $request->user()->id;
-        }
-
-        Dictionary::create($validated);
+        Dictionary::create($dictionary);
 
         return redirect('/');
     }
 
-    public function search(DictionaryRequest $request)
+    public function search(Request $request)
     {
         $query = Dictionary::query()->where('user_id', auth()->id());
 
